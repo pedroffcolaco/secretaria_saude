@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers; 
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Redirect;
 use App\Models\Usuario;
+use Illuminate\Support\Facades\Redirect as RedirectTo;
+//isso é o nome que tu pode dar
 
 class UsuariosController extends Controller
 {
@@ -22,9 +24,9 @@ class UsuariosController extends Controller
 
         $usuario = new Usuario;
         $usuario = $usuario->create( $request->all() );
-        return Redirect::to('/usuarios');
+        return RedirectTo::to('/usuarios');
     }
-    
+
     public function edit ($id){
             $usuario = Usuario::findOrFail($id);
             return view ('usuario.form', ['usuario' => $usuario]);
@@ -33,12 +35,12 @@ class UsuariosController extends Controller
     public function  update ($id, Request $request){
         $usuario = Usuario::findOrFail($id);
         $usuario->update ($request->all() );
-        
-        return Redirect::to('/usuarios');
+
+        return RedirectTo::to('/usuarios');
     }
     public function delete ($id){
         $usuario = Usuario::findOrFail($id);
         $usuario->delete();
-        return Redirect::to('/usuarios');
+        return RedirectTo::to('/usuarios');
     }
 }
